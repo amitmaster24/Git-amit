@@ -1,0 +1,14 @@
+trigger:
+- main  # Ya fir aapki branch ka jo bhi naam ho (e.g., master)
+
+pool:
+  name: 'amit ka agent'  # Jo pool aapne banaya hai, exact wahi naam
+
+steps:
+- script: echo "Hello World from my self-hosted agent!"
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo "Agla step shuru ho raha hai"
+    echo "Mera agent successfully kaam kar raha hai!"
+  displayName: 'Run a multi-line script'
