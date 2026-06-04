@@ -1,0 +1,95 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fmodern\fcharset0 Courier;\f2\froman\fcharset0 Times-Bold;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\froman\fcharset0 Times-Italic;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}}{\leveltext\leveltemplateid101\'01\'00;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Bash\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 xattr -rd com.apple.quarantine .\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Step 2: Force Code-Signing (Ad-hoc Signing)\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 Since the 
+\f1\fs26 Agent.Listener
+\f0\fs24  binary is being killed by macOS security policies, you can manually sign it locally on your Mac. This tells the OS it's safe to run.\
+Run the following command:\
+\pard\pardeftab720\partightenfactor0
+\cf0 Bash\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 codesign --force --deep --sign - ./bin/Agent.Listener\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f2\b\fs28 \cf0 Step 3: Ensure You Have the Right Architecture (If on M1/M2/M3 Mac)\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 Your folder name is 
+\f1\fs26 vsts-agent-osx-x64-4.274.1
+\f0\fs24 .\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 The 
+\f3\b\fs26 x64
+\f0\b0\fs24  means this is the Intel version of the agent.\
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 If you are running an Apple Silicon Mac (M1, M2, M3), you 
+\f4\i can
+\f0\i0  run this via Rosetta, but it is highly recommended to download the 
+\f3\b\fs26 arm64
+\f0\b0\fs24  version of the OSX agent from your Azure DevOps agent pool settings instead (
+\f1\fs26 vsts-agent-osx-arm64-...
+\f0\fs24 ).\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 If you stick with this 
+\f1\fs26 x64
+\f0\fs24  version on an Apple Silicon Mac, ensure Rosetta 2 is installed by running:\
+\pard\pardeftab720\partightenfactor0
+\cf0 Bash\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs26 \cf0 softwareupdate --install-rosetta --agree-to-license\
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f2\b\fs36 \cf0 Re-configuring and Running\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b0\fs24 \cf0 Once you have cleared the quarantine and signed the binary, reset your configuration to make sure no files are missing:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0
+\f2\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Clean up
+\f0\b0 : If things are still broken, unzip the agent into a fresh folder.\
+\ls2\ilvl0
+\f2\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Configure
+\f0\b0 : Run the configuration script first:\uc0\u8232 Bash\u8232 \u8232 
+\f1\fs26 ./config.sh\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \uc0\u8232 
+\f0\fs24 \uc0\u8232 \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls2\ilvl0
+\f2\b \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	4	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Run
+\f0\b0 : Try running it again:\uc0\u8232 Bash\u8232 \u8232 
+\f1\fs26 ./run.sh\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	5	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \uc0\u8232 
+\f0\fs24 \uc0\u8232 \u8232 \
+}
